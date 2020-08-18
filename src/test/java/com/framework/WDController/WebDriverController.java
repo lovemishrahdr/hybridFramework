@@ -189,6 +189,18 @@ public class WebDriverController {
                 verifyUrlContainsText(dataList.get(6));
                 break;
 
+            case "verifytitle":
+                verifyTitle(dataList.get(6));
+                break;
+
+            case "clickwithjs":
+                clickElementWithJS(dataList.get(4), dataList.get(5));
+                break;
+
+            case "navigationusingjs":
+                navigateUsingJS(dataList.get(6));
+                break;
+
             default:
                 log.info("No keyword matching. Please provide a correct keyword.");
                 Assert.fail();
@@ -576,6 +588,43 @@ public class WebDriverController {
             log.error("Current URL doesn't contains the given text");
             Assert.fail();
         }
+    }
+
+    public void verifyTitle(String inputData) {
+        log.info("Verifying page title");
+        if (driver.getTitle().equals(inputData)) {
+            log.info("Page contains the given title: " + inputData);
+            Assert.assertTrue(true);
+        } else {
+            log.error("Page doesn't contain the give title. Instead it contains: " + driver.getTitle());
+            Assert.fail();
+        }
+    }
+
+    public void clickElementWithJS(String object, String objectType) {
+        log.info("Performing click using JavaScript");
+        try {
+            WebElement element = getElement(object, objectType);
+            jsExecute.executeScript("arguments[0].click", element);
+            log.info("Element Clicked using JS");
+            Assert.assertTrue(true);
+        } catch (Exception e) {
+            log.error("Unable to perform action using JS");
+            Assert.fail();
+        }
+    }
+
+    public void navigateUsingJS(String inputData) {
+        log.info("Performing navigation using JavaScript");
+        try {
+            jsExecute.executeScript("window.location='" + inputData + "';");
+            log.info("Successfully navigated");
+            Assert.assertTrue(true);
+        } catch (Exception e) {
+            log.error("Unable to perform navigation");
+            Assert.fail();
+        }
+
     }
 
     public WebElement getElement(String object, String objectType) {
