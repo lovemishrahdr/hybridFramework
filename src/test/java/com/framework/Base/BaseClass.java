@@ -4,10 +4,10 @@ import com.framework.TestUtil.EReport;
 import com.framework.TestUtil.ExcelReader;
 import com.framework.TestUtil.PropertyReader;
 import com.framework.WDController.WebDriverController;
+import com.framework.WebDriverBinary.BrowserCapabilities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -23,6 +23,7 @@ public class BaseClass {
     WebDriver driver;
     WebDriverController executeCommand;
     EReport report;
+    BrowserCapabilities browser = new BrowserCapabilities();
 
     @DataProvider(name = "input")
     public Object[] inputDataObject() {
@@ -38,8 +39,7 @@ public class BaseClass {
 
     @BeforeClass
     public void beforeClassMethod() {
-        System.setProperty("webdriver.chrome.driver", "./webdriverbinaries/chrome/chromedriver");
-        driver = new ChromeDriver();
+        driver = browser.getBrowser();
         driver.get(pro.readProperty().getProperty("base_url"));
         driver.manage().window().maximize();
         executeCommand = new WebDriverController(driver);
