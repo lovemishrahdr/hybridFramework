@@ -7,6 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.io.File;
 import java.util.HashMap;
@@ -64,6 +67,35 @@ public class BrowserCapabilities {
     }
 
     private WebDriver FirefoxDriverCapabilities() {
+        try {
+            log.info("Browser Selected = Firefox");
+            log.info("Setting Up Firefox Browser");
+            System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
+            WebDriverManager.firefoxdriver().clearCache();
+            WebDriverManager.firefoxdriver().setup();
+            log.info("Firefox version: " + WebDriverManager.firefoxdriver().getDownloadedVersion());
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            if (pro.readProperty().getProperty("headless").equalsIgnoreCase("true")) {
+                log.info("Starting headless mode for chrome");
+                firefoxOptions.addArguments("--headless");
+                firefoxOptions.addArguments("--window-size=1366,768");
+            }
+
+            //Setting Custom Download Folder
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.setPreference("browser.download.folderList", 2);
+            profile.setPreference("browser.download.dir", System.getProperty("user.dir") + File.separator + "recordings" + File.separator + "download");
+            profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+                    "text/csv,application/java-archive, application/x-msexcel,application/excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+                            "application/x-excel,application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,application/xml,application/vnd.microsoft.portable-executable");
+
+            firefoxOptions.setProfile(profile);
+            driver = new FirefoxDriver(firefoxOptions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return driver;
+
     }
 }
