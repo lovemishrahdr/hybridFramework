@@ -23,8 +23,7 @@ public class BrowserCapabilities {
         if (browserName.equalsIgnoreCase("chrome")) {
             return ChromeDriverCapabilities();
         } else if (browserName.equalsIgnoreCase("firefox")) {
-            driver = FirefoxDriverCapabilities();
-            return driver;
+            return FirefoxDriverCapabilities();
         }
         return driver;
     }
@@ -53,7 +52,7 @@ public class BrowserCapabilities {
             }
 
             //Setting Custom Download Folder
-            Map<String, Object> prefs = new HashMap<String, Object>();
+            Map<String, Object> prefs = new HashMap<>();
             prefs.put("download.default_directory", System.getProperty("user.dir") + File.separator + "recordings" + File.separator + "download");
             chromeOption.setExperimentalOption("prefs", prefs);
             driver = new ChromeDriver(chromeOption);
