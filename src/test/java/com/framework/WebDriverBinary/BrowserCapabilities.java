@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -20,19 +21,25 @@ public class BrowserCapabilities {
     PropertyReader pro = new PropertyReader();
     Logger log = LogManager.getLogger(BrowserCapabilities.class.getName());
     ChromeOptions chromeOption = new ChromeOptions();
+    FirefoxOptions firefoxOptions = new FirefoxOptions();
+
 
     public WebDriver getBrowser() {
+        WebDriverManager.globalConfig().setClearResolutionCache(false);
         String browserName = pro.readProperty().getProperty("browser_name");
         if (browserName.equalsIgnoreCase("chrome")) {
             return ChromeDriverCapabilities();
         } else if (browserName.equalsIgnoreCase("firefox")) {
             return FirefoxDriverCapabilities();
+        } else if (browserName.equalsIgnoreCase("edge")) {
+            return EdgeCapabilities();
         }
         return driver;
     }
 
     private WebDriver ChromeDriverCapabilities() {
         try {
+
             log.info("Browser Selected = Google Chrome");
             log.info("Setting Up Chrome Browser");
             System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
@@ -75,7 +82,6 @@ public class BrowserCapabilities {
             WebDriverManager.firefoxdriver().setup();
             log.info("Firefox version: " + WebDriverManager.firefoxdriver().getDownloadedVersion());
 
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
             if (pro.readProperty().getProperty("headless").equalsIgnoreCase("true")) {
                 log.info("Starting headless mode for chrome");
                 firefoxOptions.addArguments("--headless");
@@ -97,5 +103,20 @@ public class BrowserCapabilities {
         }
         return driver;
 
+    }
+
+    private WebDriver EdgeCapabilities() {
+        try {
+            log.info("Browser Selected = Microsoft Edge");
+            log.info("Setting Up Microsoft Edge Browser");
+            System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
+            WebDriverManager.edgedriver().clearCache();
+            WebDriverManager.edgedriver().setup();
+            log.info("Microsoft Edge version: " + WebDriverManager.edgedriver().getDownloadedVersion());
+            driver = new EdgeDriver();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return driver;
     }
 }
