@@ -34,15 +34,19 @@ public class WebDriverController {
 
     public void commandExecutor(ArrayList<String> dataList) {
         String keyword = dataList.get(3).toLowerCase();
+        String object = dataList.get(4);
+        String objectName = dataList.get(5);
+        String testData = dataList.get(6);
+
 
         switch (keyword) {
 
             case "click":
-                clickElement(dataList.get(4), dataList.get(5));
+                clickElement(object, objectName);
                 break;
 
             case "entertext":
-                enterText(dataList.get(4), dataList.get(5), dataList.get(6));
+                enterText(object, objectName, testData);
                 break;
 
             case "acceptalert":
@@ -74,35 +78,35 @@ public class WebDriverController {
                 break;
 
             case "elementdisplayed":
-                elementDisplayed(dataList.get(4), dataList.get(5));
+                elementDisplayed(object, objectName);
                 break;
 
             case "elementnotdisplayed":
-                elementNotDisplayed(dataList.get(4), dataList.get(5));
+                elementNotDisplayed(object, objectName);
                 break;
 
             case "elementenabled":
-                elementEnabled(dataList.get(4), dataList.get(5));
+                elementEnabled(object, objectName);
                 break;
 
             case "elementnotenabled":
-                elementNotEnabled(dataList.get(4), dataList.get(5));
+                elementNotEnabled(object, objectName);
                 break;
 
             case "elementselected":
-                elementSelected(dataList.get(4), dataList.get(5));
+                elementSelected(object, objectName);
                 break;
 
             case "elementnotselected":
-                elementNotSelected(dataList.get(4), dataList.get(5));
+                elementNotSelected(object, objectName);
                 break;
 
             case "elementclickable":
-                elementClickable(dataList.get(4), dataList.get(5));
+                elementClickable(object, objectName);
                 break;
 
             case "elementnotclickable":
-                elementNotClickable(dataList.get(4), dataList.get(5));
+                elementNotClickable(object, objectName);
                 break;
 
             case "forward":
@@ -110,23 +114,23 @@ public class WebDriverController {
                 break;
 
             case "elementcontainstext":
-                elementContainsText(dataList.get(4), dataList.get(5), dataList.get(6));
+                elementContainsText(object, objectName, testData);
                 break;
 
             case "dropdownvalue":
-                selectDropDownByValue(dataList.get(4), dataList.get(5), dataList.get(6));
+                selectDropDownByValue(object, objectName, testData);
                 break;
 
             case "dropdownindex":
-                selectDropDownByIndex(dataList.get(4), dataList.get(5), dataList.get(6));
+                selectDropDownByIndex(object, objectName, testData);
                 break;
 
             case "dropdowntext":
-                selectDropDownByText(dataList.get(4), dataList.get(5), dataList.get(6));
+                selectDropDownByText(object, objectName, testData);
                 break;
 
             case "switchwindowtitle":
-                switchWindowWithTitle(dataList.get(6));
+                switchWindowWithTitle(testData);
                 break;
 
             case "presstab":
@@ -134,7 +138,7 @@ public class WebDriverController {
                 break;
 
             case "verifyalerttext":
-                verifyAlertText(dataList.get(6));
+                verifyAlertText(testData);
                 break;
 
             case "maximize":
@@ -142,11 +146,11 @@ public class WebDriverController {
                 break;
 
             case "mousehover":
-                mouseHover(dataList.get(4), dataList.get(5));
+                mouseHover(object, objectName);
                 break;
 
             case "mousehoverbyoffset":
-                mouseHoverByOffset(dataList.get(4), dataList.get(5), dataList.get(6));
+                mouseHoverByOffset(object, objectName, testData);
                 break;
 
             case "refresh":
@@ -154,11 +158,11 @@ public class WebDriverController {
                 break;
 
             case "navigate":
-                navigate(dataList.get(6));
+                navigate(testData);
                 break;
 
             case "rightclickopen":
-                rightClickOpen(dataList.get(4), dataList.get(5));
+                rightClickOpen(object, objectName);
                 break;
 
             case "newtabswitch":
@@ -166,15 +170,15 @@ public class WebDriverController {
                 break;
 
             case "addcookie":
-                addCookie(dataList.get(6));
+                addCookie(testData);
                 break;
 
             case "doubleclick":
-                doubleClick(dataList.get(4), dataList.get(5));
+                doubleClick(object, objectName);
                 break;
 
             case "clearcookiebyname":
-                clearCookieByName(dataList.get(6));
+                clearCookieByName(testData);
                 break;
 
             case "clearallcookies":
@@ -182,23 +186,23 @@ public class WebDriverController {
                 break;
 
             case "movehorizontal":
-                moveHorizontal(dataList.get(4), dataList.get(5), dataList.get(6));
+                moveHorizontal(object, objectName, testData);
                 break;
 
             case "verifyurlcontainstext":
-                verifyUrlContainsText(dataList.get(6));
+                verifyUrlContainsText(testData);
                 break;
 
             case "verifytitle":
-                verifyTitle(dataList.get(6));
+                verifyTitle(testData);
                 break;
 
             case "clickwithjs":
-                clickElementWithJS(dataList.get(4), dataList.get(5));
+                clickElementWithJS(object, objectName);
                 break;
 
             case "navigationusingjs":
-                navigateUsingJS(dataList.get(6));
+                navigateUsingJS(testData);
                 break;
 
             default:
