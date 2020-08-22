@@ -8,6 +8,8 @@ import java.util.Properties;
 
 public class PropertyReader {
     Logger log = LogManager.getLogger(PropertyReader.class.getName());
+    private String baseURL;
+
 
     public Properties readProperty() {
         Properties pro = new Properties();
@@ -19,8 +21,6 @@ public class PropertyReader {
             log.error("Unable to read properties file. Please check the file or it's contents");
             return pro;
         }
-
     }
-
 }
 
