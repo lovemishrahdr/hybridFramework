@@ -78,6 +78,9 @@ public class BaseClass {
             String screenShotPath = executeCommand.screenShot();
             System.out.println(screenShotPath);
             report.failTest(screenShotPath, result);
+        } else if (result.getStatus() == ITestResult.SKIP) {
+            log.info("Test Case Skipped");
+            report.skipTest(result);
         }
         dataList.clear();
     }

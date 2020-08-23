@@ -44,6 +44,13 @@ public class EReport {
                 MediaEntityBuilder.createScreenCaptureFromPath(screenShotPath).build());
     }
 
+    public void skipTest(ITestResult result) {
+        String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
+        extentTest.log(Status.SKIP, "Test Case SKIPPED");
+        extentTest.fail("<details><summary><b>Exception Occurred. Click to see details</b></summary>"
+                + exceptionMessage.replaceAll(",", "<br>") + "</details>\n");
+    }
+
     public void flush() {
         extentReports.flush();
     }
