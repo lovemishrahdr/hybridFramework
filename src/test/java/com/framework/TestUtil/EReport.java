@@ -47,7 +47,7 @@ public class EReport {
     public void skipTest(ITestResult result) {
         String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
         extentTest.log(Status.SKIP, "Test Case SKIPPED");
-        extentTest.fail("<details><summary><b>Exception Occurred. Click to see details</b></summary>"
+        extentTest.skip("<details><summary><b>Exception Occurred. Click to see details</b></summary>"
                 + exceptionMessage.replaceAll(",", "<br>") + "</details>\n");
     }
 
