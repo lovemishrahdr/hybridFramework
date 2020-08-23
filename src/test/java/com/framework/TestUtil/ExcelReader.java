@@ -19,8 +19,8 @@ public class ExcelReader {
 
     // public void readExcelData() {
     public String[][] getData() {
-        String excelBook = pro.readProperty().getProperty("book_name");
-        String excelSheet = pro.readProperty().getProperty("sheet_name");
+        String excelBook = pro.getWorkBookName();
+        String excelSheet = pro.getSheetName();
         try {
             FileInputStream fileStream = new FileInputStream("./datafiles/" + excelBook);
             book = new XSSFWorkbook(fileStream);

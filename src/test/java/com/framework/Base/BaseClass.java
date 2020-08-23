@@ -40,7 +40,7 @@ public class BaseClass {
     @BeforeClass
     public void beforeClassMethod() {
         driver = browser.getBrowser();
-        driver.get(pro.readProperty().getProperty("base_url"));
+        driver.get(pro.getBaseURL());
         driver.manage().window().maximize();
         executeCommand = new WebDriverController(driver);
     }

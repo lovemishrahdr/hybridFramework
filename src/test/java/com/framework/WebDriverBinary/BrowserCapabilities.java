@@ -26,7 +26,7 @@ public class BrowserCapabilities {
 
     public WebDriver getBrowser() {
         WebDriverManager.globalConfig().setClearResolutionCache(false);
-        String browserName = pro.readProperty().getProperty("browser_name");
+        String browserName = pro.getBrowser();
         if (browserName.equalsIgnoreCase("chrome")) {
             return ChromeDriverCapabilities();
         } else if (browserName.equalsIgnoreCase("firefox")) {
@@ -47,16 +47,16 @@ public class BrowserCapabilities {
             WebDriverManager.chromedriver().setup();
             log.info("ChromeDriver version: " + WebDriverManager.chromedriver().getDownloadedVersion());
 
-            if (pro.readProperty().getProperty("headless").equalsIgnoreCase("true")) {
+            if (pro.isHeadless()) {
                 log.info("Starting headless mode for chrome");
                 chromeOption.addArguments("--headless");
                 chromeOption.addArguments("--window-size=1366,768");
             }
 
-            if (pro.readProperty().getProperty("mobile_emulation").equalsIgnoreCase("true")) {
+            if (pro.isMobileEmulation()) {
                 log.info("Starting mobile emulation for chrome: " + pro.readProperty().getProperty("mobile_device"));
                 Map<String, String> mobileEmulation = new HashMap<>();
-                String deviceName = pro.readProperty().getProperty("mobile_device");
+                String deviceName = pro.getMobileDeviceName();
                 mobileEmulation.put("deviceName", deviceName);
                 chromeOption.setExperimentalOption("mobileEmulation", mobileEmulation);
             }
@@ -82,7 +82,7 @@ public class BrowserCapabilities {
             WebDriverManager.firefoxdriver().setup();
             log.info("Firefox version: " + WebDriverManager.firefoxdriver().getDownloadedVersion());
 
-            if (pro.readProperty().getProperty("headless").equalsIgnoreCase("true")) {
+            if (pro.isHeadless()) {
                 log.info("Starting headless mode for chrome");
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--window-size=1366,768");
