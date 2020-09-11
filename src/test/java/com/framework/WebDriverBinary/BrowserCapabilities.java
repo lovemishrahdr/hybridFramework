@@ -16,6 +16,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author love.mishra
+ */
+
 public class BrowserCapabilities {
     WebDriver driver;
     PropertyReader pro = new PropertyReader();
@@ -43,9 +47,9 @@ public class BrowserCapabilities {
             log.info("Browser Selected = Google Chrome");
             log.info("Setting Up Chrome Browser");
             System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
-            WebDriverManager.chromedriver().clearCache();
             WebDriverManager.chromedriver().setup();
-            log.info("ChromeDriver version: " + WebDriverManager.chromedriver().getDownloadedVersion());
+
+            log.info("ChromeDriver version: " + WebDriverManager.chromedriver().getDownloadedDriverVersion());
 
             if (pro.isHeadless()) {
                 log.info("Starting headless mode for chrome");
@@ -78,9 +82,8 @@ public class BrowserCapabilities {
             log.info("Browser Selected = Firefox");
             log.info("Setting Up Firefox Browser");
             System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
-            WebDriverManager.firefoxdriver().clearCache();
             WebDriverManager.firefoxdriver().setup();
-            log.info("Firefox version: " + WebDriverManager.firefoxdriver().getDownloadedVersion());
+            log.info("Firefox version: " + WebDriverManager.firefoxdriver().getDownloadedDriverVersion());
 
             if (pro.isHeadless()) {
                 log.info("Starting headless mode for chrome");
@@ -110,9 +113,8 @@ public class BrowserCapabilities {
             log.info("Browser Selected = Microsoft Edge");
             log.info("Setting Up Microsoft Edge Browser");
             System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
-            WebDriverManager.edgedriver().clearCache();
             WebDriverManager.edgedriver().setup();
-            log.info("Microsoft Edge version: " + WebDriverManager.edgedriver().getDownloadedVersion());
+            log.info("Microsoft Edge version: " + WebDriverManager.edgedriver().getDownloadedDriverVersion());
             driver = new EdgeDriver();
         } catch (Exception e) {
             e.printStackTrace();
