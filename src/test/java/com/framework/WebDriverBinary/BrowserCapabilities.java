@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.opera.OperaDriver;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,6 +38,8 @@ public class BrowserCapabilities {
             return FirefoxDriverCapabilities();
         } else if (browserName.equalsIgnoreCase("edge")) {
             return EdgeCapabilities();
+        } else if (browserName.equalsIgnoreCase("opera")) {
+            return OperaCapabilities();
         }
         return driver;
     }
@@ -116,6 +119,20 @@ public class BrowserCapabilities {
             WebDriverManager.edgedriver().setup();
             log.info("Microsoft Edge version: " + WebDriverManager.edgedriver().getDownloadedDriverVersion());
             driver = new EdgeDriver();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+    private WebDriver OperaCapabilities() {
+        try {
+            log.info("Browser selected = Opera");
+            log.info("Setting up Opera Browser");
+            System.setProperty("wdm.cachePath", System.getProperty("user.dir") + File.separator + "webdriverfiles");
+            WebDriverManager.operadriver().setup();
+            log.info("Opera Version: " + WebDriverManager.operadriver().getDownloadedDriverVersion());
+            driver = new OperaDriver();
         } catch (Exception e) {
             e.printStackTrace();
         }
